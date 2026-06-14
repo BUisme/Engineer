@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ใบขอสั่งซื้ออะไหล่ | Spare Part Purchase Request</title>
+<style>
+:root{--w:210mm;--h:297mm;--bg:#e9e9e9;--bd:#d6d6d6;--txt:#222;--muted:#666}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Sarabun","Prompt",Tahoma,Arial,sans-serif;color:var(--txt);background:var(--bg)}
+.hidden{display:none!important}
+.login-screen{min-height:100vh;display:grid;place-items:center;padding:18px}
+.login-card{width:min(420px,100%);background:#fff;border:1px solid var(--bd);border-radius:18px;padding:26px;box-shadow:0 10px 30px #0002}
+.login-card h1{margin:0;text-align:center;font-size:23px}.login-card p{text-align:center;color:var(--muted);margin:6px 0 22px}
+.login-card label{font-weight:700}.login-card input{width:100%;height:44px;margin-top:6px;padding:0 12px;border:1px solid #bbb;border-radius:10px;font-size:16px}
+.login-card button{width:100%;height:44px;margin-top:12px;border:0;border-radius:10px;background:#222;color:#fff;font-weight:700;font-size:15px}
+.login-error{min-height:20px;margin-top:10px;color:#b00020;text-align:center}.login-note{font-size:12px;text-align:center;color:var(--muted)}
+.toolbar,.image-editor{width:min(980px,calc(100% - 20px));margin:10px auto;padding:10px;display:grid;gap:8px;background:#fff;border:1px solid var(--bd);border-radius:14px}
+.toolbar{grid-template-columns:repeat(5,1fr)}.image-editor{grid-template-columns:repeat(6,1fr);position:sticky;top:8px;z-index:10}
+.toolbar button,.toolbar label,.image-editor button{min-height:40px;display:grid;place-items:center;padding:0 10px;border:1px solid #bbb;border-radius:10px;background:#fff;font:700 13px inherit;cursor:pointer;user-select:none}
+#imageInput{display:none}
+.page{position:relative;width:var(--w);height:var(--h);margin:14px auto;padding:8mm 11mm;background:#fff;border:1px solid #cfcfcf;box-shadow:0 6px 22px #0002;overflow:hidden}
+.page-header h1{margin:0 0 4mm;text-align:center;font-size:18px;line-height:1.22}.page-header span{display:block;margin-top:1mm;font-size:13px;font-weight:500;color:#444}
+.section-label{margin-bottom:2mm;font-size:12px;font-weight:700}
+.image-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3.4mm;margin-bottom:4.5mm}.image-grid.empty{grid-template-columns:1fr}.image-grid.one{grid-template-columns:1fr}.image-grid.three{grid-template-columns:1fr 1fr}.image-grid.many{grid-template-columns:repeat(3,1fr);gap:2.8mm}
+.empty-image-text{height:50mm;display:grid;place-items:center;border:1px dashed #aaa;background:#fafafa;color:#777;font-size:14px}
+.photo-box{position:relative;height:50mm;overflow:hidden;background:#fafafa;border:1px solid #ddd;cursor:pointer}.image-grid.one .photo-box{height:78mm}.image-grid.three .photo-box:first-child{grid-column:span 2}.image-grid.many .photo-box{height:32mm}
+.photo-box.selected{outline:3px solid #333;outline-offset:2px}.photo-box img{position:absolute;left:50%;top:50%;width:auto;height:auto;max-width:100%;max-height:100%;transform-origin:center;user-select:none;pointer-events:none}.photo-box.cover img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
+.image-note{margin:-2mm 0 2.2mm;text-align:center;color:#666;font-size:10px}
+.form-section{width:100%;max-width:168mm;margin:0 auto;font-size:13.5px}
+.form-row{display:grid;grid-template-columns:54mm minmax(0,1fr);gap:3mm;align-items:end;margin-bottom:1.5mm}
+.form-row label{font-weight:700;white-space:nowrap}.form-row label span,.detail-title span{font-size:10.2px;font-weight:500;color:#555}
+.form-row input,.form-row textarea,.doc-footer input{width:100%;border:0;border-bottom:1px dotted #999;background:transparent;padding:0 1mm 1mm;font-family:inherit;font-size:13.5px;color:var(--txt);outline:none}.form-row input{height:6.6mm}.form-row textarea{min-height:9mm;resize:none;line-height:1.28}
+.detail-title{margin:3.6mm 0 1.8mm;font-size:13.5px;font-weight:700}.detail-box{margin-left:5mm}.detail-row{grid-template-columns:47mm minmax(0,1fr);margin-bottom:1mm}
+.doc-footer{position:absolute;right:11mm;bottom:6mm;display:flex;align-items:center;gap:2mm;font-size:11px;color:#444}.doc-footer input{width:26mm;height:5mm;padding:0;font-size:11px;text-align:center}
+@media(max-width:850px){.toolbar{grid-template-columns:1fr 1fr}.image-editor{grid-template-columns:repeat(3,1fr)}.page{width:calc(100vw - 20px);height:auto;min-height:297mm;padding:18px}.form-row,.detail-row{grid-template-columns:1fr;gap:1mm}.doc-footer{position:static;margin-top:12px;justify-content:flex-end}}
+@page{size:A4 portrait;margin:0}
+@media print{html,body{width:var(--w);height:var(--h);background:#fff}.no-print,.login-screen{display:none!important}.app-screen{display:block!important}.page{width:var(--w);height:var(--h);margin:0;padding:8mm 11mm;border:0;box-shadow:none;overflow:hidden}.photo-box.selected{outline:0}}
+</style>
+</head>
+<body>
+<section id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <h1>ใบขอสั่งซื้ออะไหล่</h1><p>Spare Part Purchase Request</p>
+    <label for="passwordInput">รหัสเข้าใช้งาน</label>
+    <input id="passwordInput" type="password" placeholder="กรอกรหัส">
+    <button id="loginBtn" type="button">เข้าสู่ระบบ</button>
+    <div id="loginError" class="login-error"></div>
+    <div class="login-note">รหัสสำหรับแผนก Engineer</div>
+  </div>
+</section>
+
+<section id="appScreen" class="app-screen hidden">
+  <div class="toolbar no-print">
+    <label for="imageInput">แนบรูปภาพ</label><input id="imageInput" type="file" accept="image/*" multiple>
+    <button id="clearImagesBtn" type="button">ลบรูปทั้งหมด</button>
+    <button id="clearFormBtn" type="button">ล้างข้อมูล</button>
+    <button id="printBtn" type="button">พิมพ์ / Save PDF</button>
+    <button id="logoutBtn" type="button">ออกจากระบบ</button>
+  </div>
+
+  <div id="imageEditor" class="image-editor no-print hidden">
+    <button data-action="fit">พอดีรูป</button><button data-action="cover">เต็มกรอบ</button>
+    <button data-action="zoom-in">ขยาย +</button><button data-action="zoom-out">ย่อ -</button>
+    <button data-action="left">← ซ้าย</button><button data-action="right">ขวา →</button>
+    <button data-action="up">↑ ขึ้น</button><button data-action="down">ลง ↓</button>
+    <button data-action="rotate">หมุน 90°</button><button data-action="center">จัดกลาง</button>
+    <button data-action="remove">ลบรูปนี้</button><button data-action="done">เสร็จ</button>
+  </div>
+
+  <main class="page">
+    <header class="page-header"><h1>ใบขอสั่งซื้ออะไหล่<span>Spare Part Purchase Request</span></h1></header>
+    <section class="image-section">
+      <div class="section-label">รูปภาพประกอบ / Image Attachments</div>
+      <div id="imageGrid" class="image-grid empty"><div class="empty-image-text">แนบรูปภาพประกอบ</div></div>
+      <div id="imageLimitNote" class="image-note hidden">แสดงรูปสูงสุด 6 รูป เพื่อให้อยู่ใน A4 หน้าเดียว</div>
+    </section>
+
+    <section class="form-section">
+      <div class="form-row"><label>เครื่องจักร <span>/ Machinery</span> :</label><input id="machinery" data-save value="Mixing 1"></div>
+      <div class="form-row"><label>โซนการผลิต <span>/ Production Zone</span> :</label><input id="zone" data-save value="Mixing"></div>
+      <div class="form-row"><label>ไลน์ผลิต <span>/ Production Line</span> :</label><input id="line" data-save value="Mixing Line"></div>
+      <div class="form-row"><label>ชื่ออุปกรณ์ <span>/ Equipment Name</span> :</label><input id="equipment" data-save value="Motor Pump P301"></div>
+      <div class="form-row"><label>จุดประสงค์ในการสั่งซื้อ <span>/ Purpose</span> :</label><textarea id="purpose" data-save rows="2">สั่งซื้อเพื่อเปลี่ยนทดแทนอะไหล่ที่เสื่อมสภาพ และเก็บเป็น Spare</textarea></div>
+      <div class="detail-title">รายละเอียดอะไหล่ <span>/ Spare Part Details</span> :</div>
+      <div class="detail-box">
+        <div class="form-row detail-row"><label>1. แบรนด์ <span>/ Brand</span> :</label><input id="brand" data-save value="NOK / Corteco หรือเทียบเท่า"></div>
+        <div class="form-row detail-row"><label>2. รุ่น / รหัส <span>/ Model / Part No.</span> :</label><input id="model" data-save value="TC 30×47×7"></div>
+        <div class="form-row detail-row"><label>3. ขนาด / สเปก <span>/ Size / Spec</span> :</label><input id="spec" data-save value="30×47×7 mm, Type TC, Material NBR"></div>
+        <div class="form-row detail-row"><label>4. จำนวน <span>/ Pcs</span> :</label><input id="pcs" data-save value="4 pcs"></div>
+      </div>
+    </section>
+    <footer class="doc-footer"><span>Document Code :</span><input id="documentCode" data-save></footer>
+  </main>
+</section>
+
+<script>
+(()=>{"use strict";
+const ACCESS_CODE="Engineer",AUTH_KEY="spareOrderForm.auth",FORM_KEY="spareOrderForm.formData",MAX_IMAGES=6;
+const $=id=>document.getElementById(id);
+const loginScreen=$("loginScreen"),appScreen=$("appScreen"),passwordInput=$("passwordInput"),loginBtn=$("loginBtn"),loginError=$("loginError");
+const imageInput=$("imageInput"),imageGrid=$("imageGrid"),imageEditor=$("imageEditor"),imageLimitNote=$("imageLimitNote"),documentCode=$("documentCode");
+let images=[],selectedId=null;
+function today(){const d=new Date();return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`}
+function showApp(){loginScreen.classList.add("hidden");appScreen.classList.remove("hidden");if(!documentCode.value.trim())documentCode.value=today()}
+function showLogin(){appScreen.classList.add("hidden");loginScreen.classList.remove("hidden");setTimeout(()=>passwordInput.focus(),50)}
+function login(){if(passwordInput.value.trim()===ACCESS_CODE){localStorage.setItem(AUTH_KEY,"true");loginError.textContent="";passwordInput.value="";showApp()}else{loginError.textContent="รหัสไม่ถูกต้อง กรุณาลองใหม่";passwordInput.select()}}
+function logout(){localStorage.removeItem(AUTH_KEY);showLogin()}
+function saveForm(){const data={};document.querySelectorAll("[data-save]").forEach(el=>data[el.id]=el.value);localStorage.setItem(FORM_KEY,JSON.stringify(data))}
+function loadForm(){try{const data=JSON.parse(localStorage.getItem(FORM_KEY)||"{}");Object.entries(data).forEach(([id,v])=>{const el=$(id);if(el)el.value=v})}catch{localStorage.removeItem(FORM_KEY)}}
+function clearForm(){if(!confirm("ต้องการล้างข้อมูลในแบบฟอร์มหรือไม่?"))return;["machinery","zone","line","equipment","purpose","brand","model","spec","pcs"].forEach(id=>$(id).value="");documentCode.value=today();saveForm()}
+function uid(){return "img_"+Date.now()+"_"+Math.random().toString(16).slice(2)}
+function readFile(f){return new Promise((res,rej)=>{if(!f.type.startsWith("image/"))return rej();const r=new FileReader();r.onload=()=>res(String(r.result));r.onerror=rej;r.readAsDataURL(f)})}
+function imgClass(){const n=images.length;imageGrid.className="image-grid";imageGrid.classList.toggle("empty",n===0);if(n===1)imageGrid.classList.add("one");if(n===3)imageGrid.classList.add("three");if(n>=5)imageGrid.classList.add("many");imageLimitNote.classList.toggle("hidden",n<MAX_IMAGES)}
+function styleOf(i){return `translate(-50%, -50%) translate(${i.x||0}%, ${i.y||0}%) scale(${i.zoom||1}) rotate(${i.rotate||0}deg)`}
+function render(){imageGrid.innerHTML="";if(images.length===0){imageGrid.innerHTML='<div class="empty-image-text">แนบรูปภาพประกอบ</div>';imgClass();hideEditor(false);return}images.forEach(i=>{const box=document.createElement("div");box.className="photo-box "+(i.mode==="cover"?"cover":"fit");if(i.id===selectedId)box.classList.add("selected");const im=document.createElement("img");im.src=i.src;im.alt="รูปภาพประกอบ";im.style.transform=styleOf(i);box.appendChild(im);box.onclick=()=>select(i.id);imageGrid.appendChild(box)});imgClass()}
+function selected(){return images.find(i=>i.id===selectedId)}
+function select(id){selectedId=id;imageEditor.classList.remove("hidden");render()}
+function hideEditor(re=true){selectedId=null;imageEditor.classList.add("hidden");if(re)render()}
+function edit(a){const i=selected();if(!i&&a!=="done")return;switch(a){case"fit":i.mode="fit";break;case"cover":i.mode="cover";break;case"zoom-in":i.zoom=Math.min(3,(+i.zoom||1)+.1);break;case"zoom-out":i.zoom=Math.max(.5,(+i.zoom||1)-.1);break;case"left":i.x=(+i.x||0)-5;break;case"right":i.x=(+i.x||0)+5;break;case"up":i.y=(+i.y||0)-5;break;case"down":i.y=(+i.y||0)+5;break;case"rotate":i.rotate=((+i.rotate||0)+90)%360;break;case"center":i.x=0;i.y=0;i.zoom=1;i.rotate=0;break;case"remove":images=images.filter(x=>x.id!==selectedId);selectedId=null;imageEditor.classList.add("hidden");break;case"done":hideEditor();return}render()}
+async function addImages(files){const fs=Array.from(files||[]);if(!fs.length)return;const room=MAX_IMAGES-images.length;if(room<=0){alert(`แนบรูปได้สูงสุด ${MAX_IMAGES} รูป`);imageInput.value="";return}try{const urls=await Promise.all(fs.slice(0,room).map(readFile));urls.forEach(src=>images.push({id:uid(),src,mode:"fit",zoom:1,x:0,y:0,rotate:0}));if(fs.length>room)alert(`ระบบแสดงรูปสูงสุด ${MAX_IMAGES} รูป เพื่อให้อยู่ A4 หน้าเดียว`);render()}catch{alert("อ่านรูปไม่สำเร็จ หรือไฟล์ไม่ใช่รูปภาพ")}finally{imageInput.value=""}}
+function clearImages(){if(images.length&& !confirm("ต้องการลบรูปทั้งหมดหรือไม่?"))return;images=[];hideEditor(false);render()}
+function beforePrint(){hideEditor(false);saveForm()}
+function bind(){loginBtn.onclick=login;passwordInput.onkeydown=e=>{if(e.key==="Enter")login()};$("logoutBtn").onclick=logout;$("clearFormBtn").onclick=clearForm;$("clearImagesBtn").onclick=clearImages;$("printBtn").onclick=()=>{beforePrint();window.print()};imageInput.onchange=e=>addImages(e.target.files);document.querySelectorAll("[data-save]").forEach(el=>{el.oninput=saveForm;el.onchange=saveForm});imageEditor.onclick=e=>{const b=e.target.closest("button[data-action]");if(b)edit(b.dataset.action)};window.onbeforeprint=beforePrint}
+function init(){loadForm();if(!documentCode.value.trim())documentCode.value=today();bind();render();localStorage.getItem(AUTH_KEY)==="true"?showApp():showLogin()}
+init();
+})();
+</script>
+</body>
+</html>
