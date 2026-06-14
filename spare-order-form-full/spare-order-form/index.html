@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ใบขอสั่งซื้ออะไหล่ | Spare Part Purchase Request</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <section id="loginScreen" class="login-screen" aria-label="Login">
+    <div class="login-card">
+      <h1>ใบขอสั่งซื้ออะไหล่</h1>
+      <p>Spare Part Purchase Request</p>
+
+      <label for="passwordInput">รหัสเข้าใช้งาน</label>
+      <input id="passwordInput" type="password" autocomplete="current-password" placeholder="กรอกรหัส">
+      <button id="loginBtn" type="button">เข้าสู่ระบบ</button>
+
+      <div id="loginError" class="login-error" role="alert"></div>
+      <div class="login-note">สำหรับใช้งานภายในแผนก Engineer</div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="appScreen" class="app-screen hidden">
+
+    <div class="toolbar no-print">
+      <label class="file-btn" for="imageInput">แนบรูปภาพ</label>
+      <input id="imageInput" type="file" accept="image/*" multiple>
+
+      <button id="clearImagesBtn" type="button">ลบรูปทั้งหมด</button>
+      <button id="clearFormBtn" type="button">ล้างข้อมูล</button>
+      <button id="printBtn" type="button">พิมพ์ / Save PDF</button>
+      <button id="logoutBtn" type="button">ออกจากระบบ</button>
+    </div>
+
+    <div id="imageEditor" class="image-editor no-print hidden" aria-label="Image editor">
+      <button data-action="fit" type="button">พอดีรูป</button>
+      <button data-action="cover" type="button">เต็มกรอบ</button>
+      <button data-action="zoom-in" type="button">ขยาย +</button>
+      <button data-action="zoom-out" type="button">ย่อ -</button>
+      <button data-action="left" type="button">← ซ้าย</button>
+      <button data-action="right" type="button">ขวา →</button>
+      <button data-action="up" type="button">↑ ขึ้น</button>
+      <button data-action="down" type="button">ลง ↓</button>
+      <button data-action="rotate" type="button">หมุน 90°</button>
+      <button data-action="center" type="button">จัดกลาง</button>
+      <button data-action="remove" type="button">ลบรูปนี้</button>
+      <button data-action="done" type="button">เสร็จ</button>
+    </div>
+
+    <main class="page" id="printPage">
+      <header class="page-header">
+        <h1>
+          ใบขอสั่งซื้ออะไหล่
+          <span>Spare Part Purchase Request</span>
+        </h1>
+      </header>
+
+      <section class="image-section">
+        <div class="section-label">รูปภาพประกอบ / Image Attachments</div>
+        <div id="imageGrid" class="image-grid empty">
+          <div class="empty-image-text">แนบรูปภาพประกอบ</div>
+        </div>
+        <div id="imageLimitNote" class="image-note hidden">แสดงรูปสูงสุด 6 รูป เพื่อให้เอกสารอยู่ใน A4 หน้าเดียว</div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-row">
+          <label for="machinery">เครื่องจักร <span>/ Machinery</span> :</label>
+          <input id="machinery" data-save="machinery" type="text" value="Mixing 1">
+        </div>
+
+        <div class="form-row">
+          <label for="zone">โซนการผลิต <span>/ Production Zone</span> :</label>
+          <input id="zone" data-save="zone" type="text" value="Mixing">
+        </div>
+
+        <div class="form-row">
+          <label for="line">ไลน์ผลิต <span>/ Production Line</span> :</label>
+          <input id="line" data-save="line" type="text" value="Mixing Line">
+        </div>
+
+        <div class="form-row">
+          <label for="equipment">ชื่ออุปกรณ์ <span>/ Equipment Name</span> :</label>
+          <input id="equipment" data-save="equipment" type="text" value="Motor Pump P301">
+        </div>
+
+        <div class="form-row purpose-row">
+          <label for="purpose">จุดประสงค์ในการสั่งซื้อ <span>/ Purpose</span> :</label>
+          <textarea id="purpose" data-save="purpose" rows="2">สั่งซื้อเพื่อเปลี่ยนทดแทนอะไหล่ที่เสื่อมสภาพ และเก็บเป็น Spare</textarea>
+        </div>
+
+        <div class="detail-title">รายละเอียดอะไหล่ <span>/ Spare Part Details</span> :</div>
+
+        <div class="detail-box">
+          <div class="form-row detail-row">
+            <label for="brand">1. แบรนด์ <span>/ Brand</span> :</label>
+            <input id="brand" data-save="brand" type="text" value="NOK / Corteco หรือเทียบเท่า">
+          </div>
+
+          <div class="form-row detail-row">
+            <label for="model">2. รุ่น / รหัส <span>/ Model / Part No.</span> :</label>
+            <input id="model" data-save="model" type="text" value="TC 30×47×7">
+          </div>
+
+          <div class="form-row detail-row">
+            <label for="spec">3. ขนาด / สเปก <span>/ Size / Spec</span> :</label>
+            <input id="spec" data-save="spec" type="text" value="30×47×7 mm, Type TC, Material NBR">
+          </div>
+
+          <div class="form-row detail-row">
+            <label for="pcs">4. จำนวน <span>/ Pcs</span> :</label>
+            <input id="pcs" data-save="pcs" type="text" value="4 pcs">
+          </div>
+        </div>
+      </section>
+
+      <footer class="doc-footer">
+        <span>Document Code : </span>
+        <input id="documentCode" data-save="documentCode" type="text" aria-label="Document Code">
+      </footer>
+    </main>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
